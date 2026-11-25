@@ -3,7 +3,7 @@
 "use strict";
 function lang(){ return (window.SDI && window.SDI.lang) || "ko"; }
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
-var A = window.SD_ADDON_INFO || {lite: "shader_dict_paste-1.2.0-lite.zip", liteKB: 12, packs: [], shots: []};
+var A = window.SD_ADDON_INFO || {lite: "shader_dict_paste-1.2.1-lite.zip", liteKB: 12, packs: [], shots: []};
 var K = {
  ko: {
   h: "블렌더로 복사 → 애드온으로 붙여넣기 (애드온 v1.2)",
