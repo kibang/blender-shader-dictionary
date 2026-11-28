@@ -65,7 +65,7 @@ function chrome(){
   var md = document.querySelector('meta[name="description"]'); if(md) md.setAttribute("content", T("metaDesc", {nN: D.nN, nR: D.nR}));
   document.getElementById("brandT").textContent = T("siteTitle");
   document.getElementById("brandS").textContent = T("siteSub");
-  var tabs = {recipes: T("tabRecipes", {n: D.nR}), nodes: T("tabNodes", {n: D.nN}), textures: T("tabTextures"), engines: T("tabEngines"), photo: T("tabPhoto"), immersive: T("tabImmersive"), basics: T("tabBasics")};
+  var tabs = {recipes: T("tabRecipes", {n: D.nR}), nodes: T("tabNodes", {n: D.nN}), textures: T("tabTextures"), engines: T("tabEngines"), nw: T("tabNW"), photo: T("tabPhoto"), immersive: T("tabImmersive"), basics: T("tabBasics")};
   each("#tabs a", function(a){ var k = a.getAttribute("data-tab"); if(tabs[k]) a.textContent = tabs[k]; });
   $q.placeholder = T("search"); $q.setAttribute("aria-label", T("search"));
   var lb = document.getElementById("langbtn"); lb.textContent = T("lang"); lb.setAttribute("aria-label", T("langLabel") + ": " + T("lang"));
@@ -338,7 +338,8 @@ function renderRecipe(id){
   h += "</div>";
   h += '<div class="detail"><div class="dl">' + viewerHtml(r) + '</div><div class="dr"><div class="sec">' + row("use", L(r, "use")) + row("settings", L(r, "settings")) + row("note", L(r, "note")) + row("caption", L(r, "caption")) + row("classRef", L(r, "cls"));
   if(r.chain) h += '<div class="kv"><span class="k">' + esc(T("chain")) + "</span>" + chainHtml(r.chain) + "</div>";
-  h += '<div class="kv"><span class="k">' + esc(T("nodesUsed")) + '</span><span class="nlinks">' + r.nodes.map(function(nm){ var n = NODE_BY_NAME[nm]; return n ? '<a href="#/n/' + n.idx + '">' + esc(nm) + "</a>" : ""; }).join(" ") + "</span></div></div></div></div>";
+  h += '<div class="kv"><span class="k">' + esc(T("nodesUsed")) + '</span><span class="nlinks">' + r.nodes.map(function(nm){ var n = NODE_BY_NAME[nm]; return n ? '<a href="#/n/' + n.idx + '">' + esc(nm) + "</a>" : ""; }).join(" ") + "</span></div>" +
+    (r.nodes.indexOf("Image Texture") >= 0 ? '<p class="hint nwrecipe" id="nwrecipe">' + esc(T("nwRecipe")) + ' <a href="#/nw">' + esc(T("nwRecipeLink")) + " →</a></p>" : "") + "</div></div></div>";
   h += '<div id="treebox"></div>';
   $main.innerHTML = h; window.scrollTo(0, 0);
   wireViewer(r, sel, function(s, vi){ var t = vi >= 0 ? treeFor(r.stem, sel.s, vi) : null; document.getElementById("treebox").innerHTML = treeSection(t, varyOf(s).map(function(v, k){ return [s.vary[k][0], s.vary[k][1]]; }), false); wireDiagram(); });
